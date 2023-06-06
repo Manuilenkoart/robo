@@ -4,13 +4,18 @@ import { Jar } from "./interface";
 async function parseWebsite(): Promise<Jar | undefined> {
   try {
     const browser = await puppeteer.launch({
+      headless: 'new',
       args: ['--no-sandbox']
     });
     const page = await browser.newPage();
-    await page.goto(`https://send.monobank.ua/jar/${process.env.JAR_URL_ID}`);
+    const jarID = process.env.JAR_URL_ID;
+    console.log('jarID', jarID);
+    await page.goto(`https://send.monobank.ua/jar/${jarID}`);
 
     const textSelector = await page.waitForSelector('.jar-stats');
     const scrapedJar = await textSelector?.evaluate(el => el.textContent);
+    console.log('scrapedJar', scrapedJar);
+
     await browser.close();
 
     if(!scrapedJar) return;

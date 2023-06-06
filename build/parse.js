@@ -17,11 +17,17 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 function parseWebsite() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const browser = yield puppeteer_1.default.launch({ headless: 'new' });
+            const browser = yield puppeteer_1.default.launch({
+                headless: 'new',
+                args: ['--no-sandbox']
+            });
             const page = yield browser.newPage();
-            yield page.goto(`https://send.monobank.ua/jar/${process.env.JAR_URL_ID}`);
+            const jarID = process.env.JAR_URL_ID;
+            console.log('jarID', jarID);
+            yield page.goto(`https://send.monobank.ua/jar/${jarID}`);
             const textSelector = yield page.waitForSelector('.jar-stats');
             const scrapedJar = yield (textSelector === null || textSelector === void 0 ? void 0 : textSelector.evaluate(el => el.textContent));
+            console.log('scrapedJar', scrapedJar);
             yield browser.close();
             if (!scrapedJar)
                 return;
