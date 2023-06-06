@@ -1,4 +1,4 @@
 export interface Jar {
-  accumulated: number;
-  goal: number;
+  accumulated: string;
+  goal: string;
 }

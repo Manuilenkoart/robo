@@ -25,7 +25,7 @@ async function parseWebsite(): Promise<Jar | undefined> {
     const accumulated = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '');
     const goal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '');
 
-    return { accumulated: Number(accumulated), goal: Number(goal) } as Jar
+    return { accumulated, goal } as Jar
   } catch (error) {
     console.error('parse error:', error);
   }
