@@ -22,10 +22,10 @@ async function parseWebsite(): Promise<Jar | undefined> {
     if(!scrapedJar) return;
 
     const parts = scrapedJar.split('₴');
-    const acc = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '');
-    const accGoal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '');
+    const accumulated = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '');
+    const goal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '');
 
-    return { acc: Number(acc), accGoal: Number(accGoal) } as Jar
+    return { accumulated: Number(accumulated), goal: Number(goal) } as Jar
   } catch (error) {
     console.error('parse error:', error);
   }

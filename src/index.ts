@@ -19,7 +19,7 @@ app.get('/parse-jar', async (req: Request, res: Response) => {
   try {
     const jar = await parseWebsite();
 
-    res.status(200).json(jar)
+    res.status(200).json({jar})
   } catch (e) {
     console.log('parseWebsite err', e);
   }
