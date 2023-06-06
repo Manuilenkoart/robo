@@ -4,7 +4,7 @@ import { Jar } from "./interface";
 async function parseWebsite(): Promise<Jar | undefined> {
   try {
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox',  '--disable-setuid-sandbox']
+      args: ['--no-sandbox']
     });
     const page = await browser.newPage();
     await page.goto(`https://send.monobank.ua/jar/${process.env.JAR_URL_ID}`);
