@@ -9,20 +9,21 @@ async function parseWebsite(): Promise<Jar | undefined> {
     });
     const page = await browser.newPage();
     const jarID = process.env.JAR_URL_ID;
-    console.log('jarID', jarID);
+
     await page.goto(`https://send.monobank.ua/jar/${jarID}`);
 
     const textSelector = await page.waitForSelector('.jar-stats');
     const scrapedJar = await textSelector?.evaluate(el => el.textContent);
-    console.log('scrapedJar', scrapedJar);
 
     await browser.close();
+
+    console.log({jarID, scrapedJar});
 
     if(!scrapedJar) return;
 
     const parts = scrapedJar.split('₴');
-    const acc = parts[0].replace(/Накопичено|\s/g, '');
-    const accGoal = parts[1].replace(/Ціль|\s/g, '');
+    const acc = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '');
+    const accGoal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '');
 
     return { acc: Number(acc), accGoal: Number(accGoal) } as Jar
   } catch (error) {
