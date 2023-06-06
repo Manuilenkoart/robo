@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "downlevelIteration": true,
     "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "lib": ["es6"],
+    "outDir": "build",
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
     "plugins": [
       {
         "name": "tsconfig-paths",
