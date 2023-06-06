@@ -5,8 +5,7 @@ import checkHeadersMiddleware from "./checkHeadersMiddleware";
 
 dotenv.config();
 
-const host = process.env.HOST as string;
-const port = Number(process.env.PORT);
+const port = Number(process.env.PORT) || 3000;
 const app = express();
 
 app.use(express.json());
@@ -26,8 +25,8 @@ app.get('/parse-jar', async (req: Request, res: Response) => {
   }
 });
 
-app.listen(port, host, () =>
-  console.log(`Server listens http://${host}:${port}`)
+app.listen(port, () =>
+  console.log(`Server listen: ${port}`)
 );
 
 

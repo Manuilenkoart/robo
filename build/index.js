@@ -17,8 +17,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const checkHeadersMiddleware_1 = __importDefault(require("./checkHeadersMiddleware"));
 dotenv_1.default.config();
-const host = process.env.HOST;
-const port = Number(process.env.PORT);
+const port = Number(process.env.PORT) || 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(checkHeadersMiddleware_1.default);
@@ -34,4 +33,4 @@ app.get('/parse-jar', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log('parseWebsite err', e);
     }
 }));
-app.listen(port, host, () => console.log(`Server listens http://${host}:${port}`));
+app.listen(port, () => console.log(`Server listen: ${port}`));
