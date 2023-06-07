@@ -22,8 +22,8 @@ async function parseWebsite(): Promise<Jar | undefined> {
     if(!scrapedJar) return;
 
     const parts = scrapedJar.split('₴');
-    const accumulated = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '');
-    const goal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '');
+    const accumulated = parts[0].replace(/Накопичено|\s/g, '').replace(/Accumulated|\s/g, '') || '0';
+    const goal = parts[1].replace(/Ціль|\s/g, '').replace(/Goal|\s/g, '') || '0';
 
     return { accumulated, goal } as Jar
   } catch (error) {
